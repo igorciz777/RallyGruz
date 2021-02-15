@@ -8,6 +8,7 @@ public class StageTimer : MonoBehaviour
 {
     public string timer;
     private Stopwatch stopWatch;
+    [SerializeField]
     private StageTimeTable stageTimes;
     private Text timerText, splitText, splitDiffText;
     public bool canWin = false;
@@ -18,7 +19,6 @@ public class StageTimer : MonoBehaviour
         timerText = GameObject.Find("Canvas/TimeTable/Timer").GetComponent<Text>();
         splitText = GameObject.Find("Canvas/TimeTable/Split").GetComponent<Text>();
         splitDiffText = GameObject.Find("Canvas/TimeTable/SplitDifference").GetComponent<Text>();
-        stageTimes = GameObject.Find("Timer").GetComponent<StageTimeTable>();
         stopWatch = new Stopwatch();
     }
 

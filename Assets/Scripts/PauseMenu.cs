@@ -7,6 +7,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     public MainControls mainControls;
     public GameObject pausePanel;
+    [SerializeField]
+    private StageTimer timer;
     public bool isPaused = false;
     private void Awake() {
         mainControls = new MainControls();
@@ -24,10 +26,12 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 0f;
             pausePanel.SetActive(true);
             isPaused = true;
+            timer.stopTimer();
         }else{
             Time.timeScale = 1f;
             pausePanel.SetActive(false);
             isPaused = false;
+            timer.startTimer();
         }
     }
 }

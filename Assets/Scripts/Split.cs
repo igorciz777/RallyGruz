@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Split : MonoBehaviour
 {
+    [SerializeField]
     private StageTimer stageTimer;
     public System.TimeSpan currentSplitTime;
     public int splitNum;
     public bool isStart = false, isFinish = false;
 
-    private void Awake()
-    {
-        stageTimer = GameObject.Find("Timer").GetComponent<StageTimer>();
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
