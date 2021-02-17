@@ -13,6 +13,14 @@ public class CarSelector : MonoBehaviour
     // Update is called once per frame
     private void Awake()
     {
+        foreach (GameObject carObj in cars)
+        {
+            carObj.SetActive(false);
+            if (cars[currentCar] == carObj)
+            {
+                carObj.SetActive(true);
+            }
+        }
         UpdateText();
     }
     public void nextCar()

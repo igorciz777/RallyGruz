@@ -10,6 +10,7 @@ public class StageTimer : MonoBehaviour
     private Stopwatch stopWatch;
     [SerializeField]
     private StageTimeTable stageTimes;
+    public string stageStringKey;
     private Text timerText, splitText, splitDiffText;
     public bool canWin = false;
 
@@ -32,6 +33,14 @@ public class StageTimer : MonoBehaviour
     }
     public void stopTimer(){
         stopWatch.Stop();
+    }
+    public float getTimeInMilliseconds(){
+        return stopWatch.ElapsedMilliseconds;
+    }
+    public string getTime(){
+        return string.Format("{0:00}:{1:00}.{2:00}",
+            stopWatch.Elapsed.Minutes, stopWatch.Elapsed.Seconds,
+            stopWatch.Elapsed.Milliseconds / 10);
     }
     public void updateSplitUI(){
         splitText.text = string.Format("{0:00}:{1:00}.{2:00}",

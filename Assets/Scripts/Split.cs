@@ -23,13 +23,25 @@ public class Split : MonoBehaviour
         else if (isFinish)
         {
             stageTimer.stopTimer();
+            float time = stageTimer.getTimeInMilliseconds();
+            string timestring = stageTimer.getTime();
+            float bestTime = PlayerPrefs.GetFloat(stageTimer.stageStringKey + ".bestTimeInMs", 34400000f);
             stageTimer.updateSplitUI();
             stageTimer.updateSplitDifference(splitNum);
+            if(stageTimer.canWin){
+                PlayerPrefs.SetInt(stageTimer.stageStringKey + ".isWon", 1);
+            }
+            if(time < bestTime){
+                PlayerPrefs.SetFloat(stageTimer.stageStringKey + ".bestTimeInMs", time);
+                PlayerPrefs.SetString(stageTimer.stageStringKey + ".stageBestTime", timestring);
+            } 
         }
         else
         {
             stageTimer.updateSplitUI();
             stageTimer.updateSplitDifference(splitNum);
         }
+    }
+    private void convertTime(float time){
     }
 }
