@@ -13,6 +13,7 @@ public class CarSelector : MonoBehaviour
     // Update is called once per frame
     private void Awake()
     {
+        currentCar = getCarChoice();
         foreach (GameObject carObj in cars)
         {
             carObj.SetActive(false);
@@ -67,5 +68,11 @@ public class CarSelector : MonoBehaviour
         currentCarInfo = cars[currentCar].GetComponent<CarInfo>();
         PlayerPrefs.SetString("carPrefabName", currentCarInfo.prefabObject.name);
         Debug.Log("Prefab name set to " + PlayerPrefs.GetString("carPrefabName"));
+    }
+    public void rememberCarChoice(){
+        PlayerPrefs.SetInt("currentCar", currentCar);
+    }
+    public int getCarChoice(){
+        return PlayerPrefs.GetInt("currentCar", 0);
     }
 }

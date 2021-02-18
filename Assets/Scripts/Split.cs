@@ -6,6 +6,8 @@ public class Split : MonoBehaviour
 {
     [SerializeField]
     private StageTimer stageTimer;
+    [SerializeField]
+    private FinishEvent finishEvent;
     public System.TimeSpan currentSplitTime;
     public int splitNum;
     public bool isStart = false, isFinish = false;
@@ -34,7 +36,9 @@ public class Split : MonoBehaviour
             if(time < bestTime){
                 PlayerPrefs.SetFloat(stageTimer.stageStringKey + ".bestTimeInMs", time);
                 PlayerPrefs.SetString(stageTimer.stageStringKey + ".stageBestTime", timestring);
-            } 
+            }
+            finishEvent.onFinish();
+            finishEvent.setTimeText(timestring);
         }
         else
         {

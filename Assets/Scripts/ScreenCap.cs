@@ -15,6 +15,6 @@ public class ScreenCap : MonoBehaviour
     }
     private void takeScreenshot(){
         Debug.Log("shashin");
-        ScreenCapture.CaptureScreenshot(filename,2);
+        ScreenCapture.CaptureScreenshot(filename,4);
     }
 }

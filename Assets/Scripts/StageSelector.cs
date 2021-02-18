@@ -12,6 +12,9 @@ public class StageSelector : MonoBehaviour
     public GameObject lockedPanel;
     private int currentStage;
 
+    private void Awake() {
+        currentStage = getStageChoice();
+    }
     private void Start() {
         foreach (GameObject stageObj in sceneDataObjects)
         {
@@ -82,5 +85,11 @@ public class StageSelector : MonoBehaviour
             playButton.interactable = true;
             lockedPanel.SetActive(false);
         }
+    }
+    public void rememberStageChoice(){
+        PlayerPrefs.SetInt("currentStage", currentStage);
+    }
+    public int getStageChoice(){
+        return PlayerPrefs.GetInt("currentStage", 0);
     }
 }
