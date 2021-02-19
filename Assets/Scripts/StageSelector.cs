@@ -10,7 +10,9 @@ public class StageSelector : MonoBehaviour
     public Text stageDataText, unlockReq;
     public Button playButton;
     public GameObject lockedPanel;
-    private int currentStage;
+    public int currentStage;
+    [SerializeField]
+    private CarSelector carSelector;
 
     private void Awake() {
         currentStage = getStageChoice();
@@ -76,11 +78,15 @@ public class StageSelector : MonoBehaviour
         stageDataText.text = s;
     }
     public void checkIfLocked(){
+        CarInfo currentCarInfo = carSelector.cars[carSelector.currentCar].GetComponent<CarInfo>();
         StageInfo stageInf = sceneDataObjects[currentStage].GetComponent<StageInfo>();
         if(stageInf.unlocked == 0){
             playButton.interactable = false;
             lockedPanel.SetActive(true);
             unlockReq.text = stageInf.unlockRequirement;
+        }else if(currentCarInfo.unlocked == 0){
+            playButton.interactable = false;
+            lockedPanel.SetActive(false);
         }else{
             playButton.interactable = true;
             lockedPanel.SetActive(false);

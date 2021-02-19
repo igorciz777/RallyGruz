@@ -7,12 +7,17 @@ public class CarSelector : MonoBehaviour
 {
     public GameObject[] cars;
     public Text carDataText;
-    private int currentCar;
+    public int currentCar;
     private CarInfo currentCarInfo;
+    [SerializeField]
+    private StageSelector stageSelector;
+    [SerializeField]
+    private GameObject carLockedText;
+    [SerializeField]
+    private Text reqToUnlockText;
 
     // Update is called once per frame
-    private void Awake()
-    {
+    private void Awake() {
         currentCar = getCarChoice();
         foreach (GameObject carObj in cars)
         {
@@ -22,6 +27,10 @@ public class CarSelector : MonoBehaviour
                 carObj.SetActive(true);
             }
         }
+    }
+    private void Start()
+    {
+        checkIfLocked();
         UpdateText();
     }
     public void nextCar()
@@ -37,6 +46,8 @@ public class CarSelector : MonoBehaviour
             carObj.SetActive(false);
             if (cars[currentCar] == carObj)
             {
+                carObj.GetComponent<CarInfo>().loadInfo();
+                checkIfLocked();
                 carObj.SetActive(true);
             }
         }
@@ -54,6 +65,8 @@ public class CarSelector : MonoBehaviour
             carObj.SetActive(false);
             if (cars[currentCar] == carObj)
             {
+                carObj.GetComponent<CarInfo>().loadInfo();
+                checkIfLocked();
                 carObj.SetActive(true);
             }
         }
@@ -74,5 +87,17 @@ public class CarSelector : MonoBehaviour
     }
     public int getCarChoice(){
         return PlayerPrefs.GetInt("currentCar", 0);
+    }
+    public void checkIfLocked(){
+        currentCarInfo = cars[currentCar].GetComponent<CarInfo>();
+        StageInfo stageInf = stageSelector.sceneDataObjects[stageSelector.currentStage].GetComponent<StageInfo>();
+        if(currentCarInfo.unlocked == 0){
+            carLockedText.SetActive(true);
+            reqToUnlockText.text = currentCarInfo.reqToUnlock;
+            stageSelector.playButton.interactable = false;
+        }else if(stageInf.unlocked != 1){
+            carLockedText.SetActive(false);
+            stageSelector.playButton.interactable = true;
+        }
     }
 }

@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class CarInfo : MonoBehaviour
 {
-    public string carName, driveType, transmissionCount, carWeight, engineHP, engineMaxRPM;
+    public string carName, driveType, transmissionCount, carWeight, engineHP, engineMaxRPM, carStringKey, reqToUnlock;
     public GameObject prefabObject;
+    public int unlocked;
+    public bool preUnlocked=false;
+    private void Awake() {
+        if(preUnlocked){
+            PlayerPrefs.SetInt(carStringKey + ".unlocked", 1);
+        }
+        loadInfo();
+    }
+    public void loadInfo(){
+        unlocked = PlayerPrefs.GetInt(carStringKey + ".unlocked", 0);
+    }
 }
