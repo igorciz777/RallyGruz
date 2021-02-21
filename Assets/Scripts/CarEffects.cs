@@ -101,15 +101,15 @@ public class CarEffects : MonoBehaviour
                     headLight.enabled = true;
                     headLight.spotAngle = 100;
                     headLight.intensity = 2;
-                    headLight.range = 20;
+                    headLight.range = 40;
                     insideLampMat.SetColor("_EmissionColor", Color.white * 1f);
                     outsideLampMat.SetColor("_EmissionColor", Color.white * 0.6f);
                     break;
                 case 2:
                     headLight.enabled = true;
                     headLight.spotAngle = 70;
-                    headLight.intensity = 2.5f;
-                    headLight.range = 40;
+                    headLight.intensity = 2f;
+                    headLight.range = 100;
                     insideLampMat.SetColor("_EmissionColor", Color.white * 2f);
                     outsideLampMat.SetColor("_EmissionColor", Color.white * 0.8f);
                     break;

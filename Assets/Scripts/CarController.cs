@@ -35,6 +35,7 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private Vector3 com;
     private Vector2 axisInput;
+    private float brakeInput, brakeAxis;
     [SerializeField]
     private Rigidbody carRigidbody;
     private float vertical, horizontal, totalPower, engineLerpValue, brakeForce = 0;
@@ -52,6 +53,7 @@ public class CarController : MonoBehaviour
     {
         setObjects();
         carRigidbody.centerOfMass = com;
+        engineSound.Play();
 
     }
     // Update is called once per frame
@@ -75,6 +77,7 @@ public class CarController : MonoBehaviour
         carController = new MainControls();
         
         carController.Car.ThrottleAxis.performed += ctx => axisInput.y = ctx.ReadValue<float>();
+        carController.Car.BrakeAxis.performed += ctx => brakeInput = ctx.ReadValue<float>();
         carController.Car.SteeringAxis.performed += ctx => axisInput.x = ctx.ReadValue<float>();
         carController.Car.GearShift.performed += ctx => changeGears(ctx);
         carController.Car.Handbrake.performed += ctx => handbrake = true;
@@ -83,6 +86,7 @@ public class CarController : MonoBehaviour
         rpmText = GameObject.Find("Canvas/RPM").GetComponent<Text>();
         kmhText = GameObject.Find("Canvas/KMH").GetComponent<Text>();
         gearText = GameObject.Find("Canvas/Gear").GetComponent<Text>();
+
     }
     private void OnEnable() {
         carController.Enable();
@@ -119,6 +123,7 @@ public class CarController : MonoBehaviour
     private void axisUpdate()
     {
         vertical = axisInput.y;
+        brakeAxis = brakeInput;
         ///smooth steering solution:
         ///https://forum.unity.com/threads/axis-gravity-smoothing.943131/
         ///
@@ -132,7 +137,7 @@ public class CarController : MonoBehaviour
     }
     private void steeringWheelMatch()
     {
-        steeringWheel.transform.localEulerAngles = Vector3.back * Mathf.Clamp((horizontal * 360), -360, 360);
+        steeringWheel.transform.localEulerAngles = Vector3.back * Mathf.Clamp((horizontal * 450), -450, 450);
     }
     private void wheelPower()
     {
@@ -275,9 +280,9 @@ public class CarController : MonoBehaviour
     }
     private void setBrakes()
     {
-        if (vertical < 0)
+        if (brakeAxis > 0)
         {
-            brakeForce = -brakePower * vertical;
+            brakeForce = brakePower * brakeAxis;
             isBraking = true;
         }
         else

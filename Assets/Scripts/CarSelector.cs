@@ -30,8 +30,10 @@ public class CarSelector : MonoBehaviour
     }
     private void Start()
     {
-        checkIfLocked();
         UpdateText();
+    }
+    private void Update() {
+        checkIfLocked();
     }
     public void nextCar()
     {
@@ -95,9 +97,12 @@ public class CarSelector : MonoBehaviour
             carLockedText.SetActive(true);
             reqToUnlockText.text = currentCarInfo.reqToUnlock;
             stageSelector.playButton.interactable = false;
-        }else if(stageInf.unlocked != 1){
+        }else if(stageInf.unlocked == 1){
             carLockedText.SetActive(false);
             stageSelector.playButton.interactable = true;
+        }
+        else{
+            carLockedText.SetActive(false);
         }
     }
 }

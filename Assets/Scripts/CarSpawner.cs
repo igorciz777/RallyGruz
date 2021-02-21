@@ -8,7 +8,9 @@ public class CarSpawner : MonoBehaviour
 
     private void Awake() {
         spawnPoint = this.transform;
-
         GameObject.Instantiate(Resources.Load(PlayerPrefs.GetString("carPrefabName")),spawnPoint.position,spawnPoint.transform.rotation);
+    }
+    public void spawnCar(){
+        
     }
 }

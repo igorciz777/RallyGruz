@@ -57,6 +57,7 @@ public class StageSelector : MonoBehaviour
             currentStage = sceneDataObjects.Length - 1;
         }
         updateText();
+        checkIfLocked();
         foreach (GameObject stageObj in sceneDataObjects)
         {
             stageObj.SetActive(false);

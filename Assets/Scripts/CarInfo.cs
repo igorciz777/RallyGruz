@@ -12,6 +12,8 @@ public class CarInfo : MonoBehaviour
         if(preUnlocked){
             PlayerPrefs.SetInt(carStringKey + ".unlocked", 1);
         }
+    }
+    private void Start() {
         loadInfo();
     }
     public void loadInfo(){
