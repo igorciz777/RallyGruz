@@ -31,6 +31,12 @@ public class UnlockCarCheck : MonoBehaviour
                     PlayerPrefs.SetInt("lada.unlocked", 1);
                 }
                 break;
+            case "deltas4":
+                int allstagewon = PlayerPrefs.GetInt("Stage6.isWon", 0);
+                if(allstagewon == 1){
+                    PlayerPrefs.SetInt("deltas4.unlocked", 1);
+                }
+                break;
             default:
                 Debug.Log("Unspecified winning condition");
                 break;
