@@ -6,3 +6,5 @@ Rally racing video game made for a school project
 -Photoshop
 -Audacity
 -Visual Studio Code
+### Written in
+-C#
